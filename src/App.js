@@ -1,13 +1,13 @@
 import './style.css';
 import Navbar from './components/Navbar';
 import TextForm from './components/TextForm';
-// import About from './components/About';
+import About from './components/About';
 import Alert from './components/Alert'
 import React, { useState } from 'react';
-// import {
-//     Routes,
-//     Route,
-//   } from "react-router-dom";
+import {
+    Routes,
+    Route,
+  } from "react-router-dom";
 
 
 
@@ -40,20 +40,21 @@ export default function Text() {
          }
      }
     return (
-        <>
+    <div>
         
             {/* <Navbar title="Textutils2" aboutus="About Me"/> */}
             <Navbar mode={mode} toggleMode={toggleMode}/>
             <Alert alert={alert}/>
             <div className="container my-4" >
          
-                {/* <Routes>
-                <Route path="About" element={} />
-                <Route path="/" element={}/>
-                </Routes> */}
-                <TextForm showAlert={showAlert} head='Enter text to analyze' mode={mode}/>
-                {/* <About/> */}
-        </div>            
-       </>
+                <Routes>
+                <Route path="About" element={<About mode={mode}/>} />
+                <Route path="/" element={<TextForm showAlert={showAlert} head='Enter text to analyze' mode={mode}/>}/>
+                </Routes>
+                
+              
+        </div>    
+                        
+      </div> 
     )
 }

@@ -8,7 +8,12 @@ export default function TextForm(props) {
         //  console.log("Uppercase was clicked"+text)
         let newText = text.toUpperCase();
         setText(newText);
-        props.showAlert("Converted To UpperCase","success")
+        if(newText===text.toUpperCase){
+            props.showAlert("Already Converted","danger")}
+        else{
+            props.showAlert("Case Converted","success")
+        }
+        
     }
     const handleLoClick = () => {
         //  console.log("Uppercase was clicked"+text)
@@ -53,17 +58,17 @@ export default function TextForm(props) {
         <h1 > { props.head } </h1> 
         <div className = "container my-3" >
         <textarea className = "form-control" id = "exampleFormControlTextarea1" onChange = { handleOnChange } style={{backgroundColor: props.mode==='dark'?'grey':'white',color: props.mode==='dark'?'white':'black'}}rows = "8"value = { text } > </textarea>
-        <button className = "btn btn-primary mt-2" onClick = { handleUpClick }> Convert to Uppercase </button> 
-        <button className = "btn btn-primary mt-2 ms-2" onClick = { handleLoClick }> Convert to Lowercase </button> 
-        <button className = "btn btn-primary mt-2 ms-2" onClick = { handleClClick }> Clear Text</button> 
-        <button className = "btn btn-primary mt-2 ms-2" onClick = { handleReClick }>Reverse String</button>  
+        <button disabled={text.length===0}className = "btn btn-primary mt-2 ms-2" onClick = { handleUpClick }> Convert to Uppercase </button> 
+        <button disabled={text.length===0}className = "btn btn-primary mt-2 ms-2" onClick = { handleLoClick }> Convert to Lowercase </button> 
+        <button disabled={text.length===0}className = "btn btn-primary mt-2 ms-2" onClick = { handleClClick }> Clear Text</button> 
+        <button disabled={text.length===0}className = "btn btn-primary mt-2 ms-2" onClick = { handleReClick }>Reverse String</button>  
 
       </div>
 
         <div className = "container" >
         <h2> Your Text Summary </h2> 
-        <p id = "count"> {text.split(" ").length } words and { text.length } characters </p> 
-        <p> { 0.08 * text.split(" ").length } Minutes to read </p>
+        <p> {text.split(/\s+/).filter((element)=>{return element.length!==0}).length } words and { text.length } characters </p> 
+        <p> { 0.08 * text.split(" ").filter((element)=>{return element.length!==0}).length } Minutes to read </p>
         <h2>Preview</h2>
         <p>{text.length>0?text:"Enter something Above to preview it" }</p>
         </div>
